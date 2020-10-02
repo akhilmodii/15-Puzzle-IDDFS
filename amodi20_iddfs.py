@@ -1,6 +1,6 @@
 import os
 import time
-from collections import deque
+
 
 import itertools
 
@@ -15,7 +15,8 @@ class Node:
         self.middle2 = None
         self.data = value
         self.parent = None
-        self.action = None
+
+
 
 
 class Tree:
@@ -97,13 +98,13 @@ def moves(input):
     return list
 
 
-def findPath(node):
-    path = []
-    while(node.parent is not None):
-        path.append(node.action)
-        node = node.parent
-    path.reverse()
-    return path
+# def findPath(node):
+#     path = []
+#     while(node.parent is not None):
+#         path.append(node)
+#         node = node.parent
+#     path.reverse()
+#     return path
 
 
 
@@ -123,9 +124,8 @@ def IDDFS(initial, final, root):
     for depth in itertools.count():
         route = dfs([root.data], depth)
         if route:
-            # return route     # add find_path here
-            return findPath(root)
-
+            return route
+            # return findPath(root)
 
 
 # Formats the user input.
@@ -149,8 +149,6 @@ def printMoves(list):
 if __name__ == "__main__":
     # Tree.mtree = Tree.Tree()
     m = Tree()
-
-
     Tree.root = None
     root = Tree.root
     userInput = input("Enter initial configuration: ")
@@ -162,11 +160,9 @@ if __name__ == "__main__":
     finalBoard = str([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]])
 
     root = m.insert(root, initialBoard)
-    # print(IDDFS(initialBoard, finalBoard, root))
     result = IDDFS(initialBoard, finalBoard, root)
     print(result)
-    # BFS(initialBoard, finalBoard)
-    # printMoves(movesList)
+    printMoves(movesList)
     finalMemory = process.memory_info().rss / 1024.0
     totalMemory = finalMemory - initialMemory
     endTime = time.time()
